@@ -11,6 +11,6 @@ int main() {
     z.real = 1.0;
     z.imaginary = 1.0;
     printf("%lf + %lfi\n", z.real, z.imaginary);
-    return 0;
 
+    return 0;
 }
