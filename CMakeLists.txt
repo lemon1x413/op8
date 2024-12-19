@@ -3,4 +3,7 @@ project(op8 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(op8 main.c)
+add_executable(op8 main.c
+        io.h
+        colors.h
+        calculations.h)

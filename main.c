@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <math.h>
-
-typedef struct {
-    double real;
-    double imaginary;
-} complex;
+#include "io.h"
+#include "calculations.h"
+#include "colors.h"
 
 int main() {
     complex z;
