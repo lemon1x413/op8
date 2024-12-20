@@ -6,11 +6,60 @@ typedef struct {
     double imaginary;
 } complex;
 
-complex divisionComplex(complex z1, complex z2) { //fix
+complex divisionComplex(complex z1, complex z2) {
     complex result;
     result.real = (z1.real * z2.real + z1.imaginary * z2.imaginary) / (z2.real * z2.real + z2.imaginary * z2.imaginary);
     result.imaginary = (z1.imaginary * z2.real - z1.real * z2.imaginary) / (z2.real * z2.real + z2.imaginary * z2.imaginary);
     return result;
 }
 
-#endif //OP8_CALCULATIONS_H
+void calculateComplexResistance(double L, double C, double R1, double R2, double fMin, double fMax, double fStep, char circuitChoice) {
+    complex Z = {0, 0}, numerator = {0, 0}, denominator = {0, 0};
+    double f0 = 1.0 / (2.0 * M_PI * sqrt(L * C));
+    printf(DARK_BLUE"Resonance frequency: %.7e\n"RESET, f0);
+    double f = fMin;
+    int i = 0;
+    do {
+        double omega = 2.0 * M_PI * f;
+        switch (circuitChoice) {
+            case '1':
+                numerator.real = L / C;
+                numerator.imaginary = -R1 / (omega * C);
+                denominator.real = R1;
+                denominator.imaginary = omega * L - 1.0 / (omega * C);
+                Z = divisionComplex(numerator, denominator);
+                break;
+            case '2':
+                numerator.real = L / C;
+                numerator.imaginary = R1 / (omega * C);
+                denominator.real = R1;
+                denominator.imaginary = omega * L - 1.0 / (omega * C);
+                Z = divisionComplex(numerator, denominator);
+                break;
+            case '3':
+                numerator.real = R1 * R2;
+                numerator.imaginary = R1 * (omega * L - 1.0 / (omega * C));
+                denominator.real = R1 + R2;
+                denominator.imaginary = omega * L - 1.0 / (omega * C);
+                Z = divisionComplex(numerator, denominator);
+                break;
+            case '4':
+                numerator.real = R1 * R2 + L / C;
+                numerator.imaginary = omega * L * R1 - R2 / (omega * C);
+                denominator.real = R1 + R2;
+                denominator.imaginary = omega * L - 1.0 / (omega * C);
+                Z = divisionComplex(numerator, denominator);
+                break;
+            default:
+                printf(RED"Error. Invalid circuit choice.\n"RESET);
+                break;
+        }
+        printf(BLUE"f = %.5e, Z = %.7e %c i * %.7e \n"RESET, f, Z.real, Z.imaginary > 0
+                                                                        ? '+'
+                                                                        : '-', fabs(Z.imaginary));
+        f += fStep;
+        i++;
+    } while (f <= fMax);
+}
+
+#endif

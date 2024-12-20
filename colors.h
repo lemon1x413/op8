@@ -4,6 +4,7 @@
 #define RED "\033[0;31m"
 #define GREEN "\033[0;32m"
 #define BLUE "\x1b[36m"
+#define DARK_BLUE "\x1b[34m"
 #define YELLOW  "\x1b[33m"
 #define RESET "\033[0m"
 

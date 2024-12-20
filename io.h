@@ -5,13 +5,49 @@
 #include <conio.h>
 #include "colors.h"
 
-bool conditionChoiceCircuit(char value, char choice1, char choice2, char choice3, char choice4) {
-    return value != choice1 && value != choice2 && value != choice3 && value != choice4;
+#define FMIN_MIN 1e-15
+#define FMIN_MAX 1e4
+#define FMAX_MIN 1e-15
+#define FMAX_MAX 1e4
+/*#define L_MIN 0
+#define L_MAX 1
+#define C_MIN 0
+#define C_MAX 1
+#define R_MIN 0
+#define R_MAX 1*/
+#define VALUE_MIN 1e-15
+#define VALUE_MAX 1e4
+
+bool conditionChoiceCircuit(char value) {
+    return value != '1' && value != '2' && value != '3' && value != '4';
+}
+/*
+
+bool conditionL(double value) {
+    return value < L_MIN || value > L_MAX;
 }
 
-bool conditionDF(double value, double min, double max) {
-    return value < min || value > max;
+bool conditionC(double value) {
+    return value < C_MIN || value > C_MAX;
 }
+
+bool conditionR(double value) {
+    return value < R_MIN || value > R_MAX;
+}
+*/
+
+bool conditionFMin(double value) {
+    return value < FMIN_MIN || value > FMIN_MAX;
+}
+
+bool conditionFMax(double value) {
+    return value < FMAX_MIN || value > FMAX_MAX;
+}
+
+bool conditionDouble(double value) {
+    return value < VALUE_MIN || value > VALUE_MAX;
+}
+
 
 double validInputDouble(char *message, bool (*condition)(double)) {
     double value = 0;
@@ -39,4 +75,66 @@ char validInputChoice(char *message, bool (*condition)(char)) {
     return value;
 }
 
+void printChosenCircuit(char variant) {
+    switch (variant) {
+        case '1':
+            printf(YELLOW"●─┬─────────▆▆▆───────◠◠◠◠──┬─●\n"
+                   "  │          R          L   │\n"
+                   "  │                         │\n"
+                   "  │               C         │\n"
+                   "  └───────────────││────────┘\n"RESET);
+            break;
+        case '2':
+            printf(YELLOW"●─┬────────▆▆▆──────││──────┬─●\n"
+                   "  │         R       C       │\n"
+                   "  │                         │\n"
+                   "  │      L                  │\n"
+                   "  └────◠◠◠◠─────────────────┘\n"RESET);
+            break;
+        case '3':
+            printf(YELLOW"●─┬─────────▆▆▆──────││─────┐\n"
+                   "  │          R2      C      │\n"
+                   "  │                         │\n"
+                   "  █ R1     L                │\n"
+                   "●─┴──────◠◠◠◠───────────────┘\n"RESET);
+            break;
+        case '4':
+            printf(YELLOW"●─┬────────▆▆▆──────────────┐\n"
+                   "  █ R1      R2              │\n"
+                   "  ┴                         │\n"
+                   "  ┬ C       L               │\n"
+                   "●─┴───────◠◠◠◠──────────────┘\n"RESET);
+            break;
+        default:
+            printf("Wrong option. The option should be from 1 to 4.\n");
+            break;
+    }
+}
+
+void printCircuits() {
+    printf("Circuit #1:\n"
+           BLUE"●─┬─────────▆▆▆───────◠◠◠◠──┬─●\n"
+           "  │          R          L   │\n"
+           "  │                         │\n"
+           "  │               C         │\n"
+           "  └───────────────││────────┘\n"RESET);
+    printf("Circuit #2:\n"
+           BLUE"●─┬────────▆▆▆──────││──────┬─●\n"
+           "  │         R       C       │\n"
+           "  │                         │\n"
+           "  │      L                  │\n"
+           "  └────◠◠◠◠─────────────────┘\n"RESET);
+    printf("Circuit #3:\n"
+           BLUE"●─┬─────────▆▆▆──────││─────┐\n"
+           "  │          R2      C      │\n"
+           "  │                         │\n"
+           "  █ R1     L                │\n"
+           "●─┴──────◠◠◠◠───────────────┘\n"RESET);
+    printf("Circuit #4:\n"
+           BLUE"●─┬────────▆▆▆──────────────┐\n"
+           "  █ R1      R2              │\n"
+           "  ┴                         │\n"
+           "  ┬ C       L               │\n"
+           "●─┴───────◠◠◠◠──────────────┘\n"RESET);
+}
 #endif //OP8_IO_H
