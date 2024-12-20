@@ -35,15 +35,21 @@ int main() {
                 break;
         }
 
-        fMin = validInputDouble(GREEN"Enter fMin (from 1e-15 to 1e4): "RESET, conditionDouble);
+        fMin = validInputDouble(GREEN"Enter fMin (from 1e-15 to 1e4): "RESET, conditionFMin);
         do {
-            fMax = validInputDouble(GREEN"Enter fMax (from 1e-15 to 1e4): "RESET, conditionDouble);
+            fMax = validInputDouble(GREEN"Enter fMax (from 1e-15 to 1e4): "RESET, conditionFMax);
             if (fMin > fMax) {
                 printf(RED"Error. fMax must be greater than fMin.\n"RESET);
             }
         } while (fMin > fMax);
 
-        fStep = validInputDouble(GREEN"Enter fStep (from 1e-15 to 1e4): "RESET, conditionDouble);
+        do {
+            fStep = validInputDouble(ITALIC_GREEN"fStep must be less than fMax - fMin.\n"
+                                     GREEN"Enter fStep (from 1e-15 to 1e4): "RESET, conditionDouble);
+            if (fStep > fMax - fMin) {
+                printf(RED"Error. fStep must be less than fMax - fMin.\n"RESET);
+            }
+        } while (fStep > fMax - fMin);
 
         calculateComplexResistance(L, C, R1, R2, fMin, fMax, fStep, circuitChoice);
 

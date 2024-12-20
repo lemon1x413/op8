@@ -9,32 +9,16 @@
 #define FMIN_MAX 1e4
 #define FMAX_MIN 1e-15
 #define FMAX_MAX 1e4
-/*#define L_MIN 0
-#define L_MAX 1
-#define C_MIN 0
-#define C_MAX 1
-#define R_MIN 0
-#define R_MAX 1*/
 #define VALUE_MIN 1e-15
 #define VALUE_MAX 1e4
 
 bool conditionChoiceCircuit(char value) {
     return value != '1' && value != '2' && value != '3' && value != '4';
 }
-/*
 
-bool conditionL(double value) {
-    return value < L_MIN || value > L_MAX;
+bool conditionDouble(double value) {
+    return value < VALUE_MIN || value > VALUE_MAX;
 }
-
-bool conditionC(double value) {
-    return value < C_MIN || value > C_MAX;
-}
-
-bool conditionR(double value) {
-    return value < R_MIN || value > R_MAX;
-}
-*/
 
 bool conditionFMin(double value) {
     return value < FMIN_MIN || value > FMIN_MAX;
@@ -43,11 +27,6 @@ bool conditionFMin(double value) {
 bool conditionFMax(double value) {
     return value < FMAX_MIN || value > FMAX_MAX;
 }
-
-bool conditionDouble(double value) {
-    return value < VALUE_MIN || value > VALUE_MAX;
-}
-
 
 double validInputDouble(char *message, bool (*condition)(double)) {
     double value = 0;

@@ -1,11 +1,12 @@
 #ifndef OP8_COLORS_H
 #define OP8_COLORS_H
 
-#define RED "\033[0;31m"
-#define GREEN "\033[0;32m"
-#define BLUE "\x1b[36m"
-#define DARK_BLUE "\x1b[34m"
-#define YELLOW  "\x1b[33m"
-#define RESET "\033[0m"
+#define RED "\e[0;31m"
+#define GREEN "\e[0;32m"
+#define ITALIC_GREEN "\e[3;32m"
+#define BLUE "\e[0;36m"
+#define DARK_BLUE "\e[0;34m"
+#define YELLOW  "\e[0;33m"
+#define RESET "\e[0;0m"
 
 #endif //OP8_COLORS_H
