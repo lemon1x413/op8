@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 #include <windows.h>
 #include "io.h"
 #include "calculations.h"
@@ -12,7 +11,7 @@ int main() {
     do {
         double L = 0.0, C = 0.0, R1 = 0.0, R2 = 0.0, fMin = 0.0, fMax = 0.0, fStep = 0.0, f = 0.0;
         char circuitChoice = 0;
-        printf("This ");
+        printf(GREEN"This program calculates complex resistance of a given oscillatory circuit depending on the current frequency.\n"RESET);
         printCircuits();
         circuitChoice = validInputChoice("Chose circuit: \n", conditionChoiceCircuit);
         printChosenCircuit(circuitChoice);

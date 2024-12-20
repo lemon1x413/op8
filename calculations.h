@@ -1,6 +1,8 @@
 #ifndef OP8_CALCULATIONS_H
 #define OP8_CALCULATIONS_H
 
+#include <math.h>
+
 typedef struct {
     double real;
     double imaginary;
