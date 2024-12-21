@@ -16,38 +16,38 @@ int main() {
         circuitChoice = validInputChoice("Chose circuit: \n", conditionChoiceCircuit);
         printChosenCircuit(circuitChoice);
 
-        L = validInputDouble(GREEN"Enter L[mHn] (from 1e-15 to 1e4): "RESET, conditionDouble);
+        L = validInputDouble(GREEN"\nEnter L[mHn] (from 1e-15 to 1e4): "RESET, conditionDouble);
 
-        C = validInputDouble(GREEN"Enter C[mcF] (from 1e-15 to 1e4): "RESET, conditionDouble);
+        C = validInputDouble(GREEN"\nEnter C[mcF] (from 1e-15 to 1e4): "RESET, conditionDouble);
 
         switch (circuitChoice) {
             case '1':
             case '2':
-                R1 = validInputDouble(GREEN"Enter R[Ohm] (from 1e-15 to 1e4): "RESET, conditionDouble);
+                R1 = validInputDouble(GREEN"\nEnter R[Ohm] (from 1e-15 to 1e4): "RESET, conditionDouble);
                 break;
             case '3':
             case '4':
-                R1 = validInputDouble(GREEN"Enter R1[Ohm] (from 1e-15 to 1e4): "RESET, conditionDouble);
-                R2 = validInputDouble(GREEN"Enter R2[Ohm] (from 1e-15 to 1e4): "RESET, conditionDouble);
+                R1 = validInputDouble(GREEN"\nEnter R1[Ohm] (from 1e-15 to 1e4): "RESET, conditionDouble);
+                R2 = validInputDouble(GREEN"\nEnter R2[Ohm] (from 1e-15 to 1e4): "RESET, conditionDouble);
                 break;
             default:
-                printf(RED"Error. Invalid circuit choice.\n"RESET);
+                printf(RED"Invalid input. Invalid circuit choice.\n"RESET);
                 break;
         }
 
-        fMin = validInputDouble(GREEN"Enter fMin (from 1e-15 to 1e4): "RESET, conditionFMin);
+        fMin = validInputDouble(GREEN"\nEnter fMin (from 1e-15 to 1e4): "RESET, conditionFMin);
         do {
-            fMax = validInputDouble(GREEN"Enter fMax (from 1e-15 to 1e4): "RESET, conditionFMax);
+            fMax = validInputDouble(GREEN"\nEnter fMax (from 1e-15 to 1e4): "RESET, conditionFMax);
             if (fMin > fMax) {
-                printf(RED"Error. fMax must be greater than fMin.\n"RESET);
+                printf(RED"Invalid input. fMax must be greater than fMin.\n"RESET);
             }
         } while (fMin > fMax);
 
         do {
-            fStep = validInputDouble(ITALIC_GREEN"fStep must be less than fMax - fMin.\n"
-                                     GREEN"Enter fStep (from 1e-15 to 1e4): "RESET, conditionDouble);
+            fStep = validInputDouble(RED"\nWARNING!"ITALIC_GREEN"fStep must be less than fMax - fMin.\n"
+                                     GREEN"\nEnter fStep (from 1e-15 to 1e4): "RESET, conditionDouble);
             if (fStep > fMax - fMin) {
-                printf(RED"Error. fStep must be less than fMax - fMin.\n"RESET);
+                printf(RED"Invalid input. fStep must be less than fMax - fMin.\n"RESET);
             }
         } while (fStep > fMax - fMin);
 

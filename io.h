@@ -1,5 +1,6 @@
 #ifndef OP8_IO_H
 #define OP8_IO_H
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <conio.h>
@@ -35,7 +36,7 @@ double validInputDouble(char *message, bool (*condition)(double)) {
         printf("%s", message);
         validInput = scanf("%lf", &value);
         if (validInput != 1 || condition(value)) {
-            printf(RED"Invalid input\n"RESET);
+            printf(RED"Invalid input.\n"RESET);
         }
         fflush(stdin);
     } while (validInput != 1 || condition(value));
@@ -48,14 +49,41 @@ char validInputChoice(char *message, bool (*condition)(char)) {
         printf("%s", message);
         value = getch();
         if (condition(value)) {
-            printf(RED"Invalid input\n"RESET);
+            printf(RED"Invalid input.\n"RESET);
         }
     } while (condition(value));
     return value;
 }
 
-void printChosenCircuit(char variant) {
-    switch (variant) {
+void printCircuits() {
+    printf("Circuit #1:\n"
+           BLUE"●─┬─────────▆▆▆───────◠◠◠◠──┬─●\n"
+           "  │          R          L   │\n"
+           "  │                         │\n"
+           "  │               C         │\n"
+           "  └───────────────││────────┘\n"RESET);
+    printf("Circuit #2:\n"
+           BLUE"●─┬────────▆▆▆──────││──────┬─●\n"
+           "  │         R       C       │\n"
+           "  │                         │\n"
+           "  │      L                  │\n"
+           "  └────◠◠◠◠─────────────────┘\n"RESET);
+    printf("Circuit #3:\n"
+           BLUE"●─┬─────────▆▆▆──────││─────┐\n"
+           "  │          R2      C      │\n"
+           "  │                         │\n"
+           "  █ R1     L                │\n"
+           "●─┴──────◠◠◠◠───────────────┘\n"RESET);
+    printf("Circuit #4:\n"
+           BLUE"●─┬────────▆▆▆──────────────┐\n"
+           "  █ R1      R2              │\n"
+           "  ┴                         │\n"
+           "  ┬ C       L               │\n"
+           "●─┴───────◠◠◠◠──────────────┘\n"RESET);
+}
+
+void printChosenCircuit(char choice) {
+    switch (choice) {
         case '1':
             printf(YELLOW"●─┬─────────▆▆▆───────◠◠◠◠──┬─●\n"
                    "  │          R          L   │\n"
@@ -85,35 +113,9 @@ void printChosenCircuit(char variant) {
                    "●─┴───────◠◠◠◠──────────────┘\n"RESET);
             break;
         default:
-            printf("Wrong option. The option should be from 1 to 4.\n");
+            printf(RED"Wrong option. The option should be from 1 to 4.\n"RESET);
             break;
     }
 }
 
-void printCircuits() {
-    printf("Circuit #1:\n"
-           BLUE"●─┬─────────▆▆▆───────◠◠◠◠──┬─●\n"
-           "  │          R          L   │\n"
-           "  │                         │\n"
-           "  │               C         │\n"
-           "  └───────────────││────────┘\n"RESET);
-    printf("Circuit #2:\n"
-           BLUE"●─┬────────▆▆▆──────││──────┬─●\n"
-           "  │         R       C       │\n"
-           "  │                         │\n"
-           "  │      L                  │\n"
-           "  └────◠◠◠◠─────────────────┘\n"RESET);
-    printf("Circuit #3:\n"
-           BLUE"●─┬─────────▆▆▆──────││─────┐\n"
-           "  │          R2      C      │\n"
-           "  │                         │\n"
-           "  █ R1     L                │\n"
-           "●─┴──────◠◠◠◠───────────────┘\n"RESET);
-    printf("Circuit #4:\n"
-           BLUE"●─┬────────▆▆▆──────────────┐\n"
-           "  █ R1      R2              │\n"
-           "  ┴                         │\n"
-           "  ┬ C       L               │\n"
-           "●─┴───────◠◠◠◠──────────────┘\n"RESET);
-}
 #endif //OP8_IO_H
