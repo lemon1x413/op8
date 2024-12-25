@@ -9,10 +9,9 @@ typedef struct {
 } complex;
 
 complex divisionComplex(complex z1, complex z2) {
-    complex result;
+    complex result = {0, 0};
     result.real = (z1.real * z2.real + z1.imaginary * z2.imaginary) / (z2.real * z2.real + z2.imaginary * z2.imaginary);
-    result.imaginary =
-            (z1.imaginary * z2.real - z1.real * z2.imaginary) / (z2.real * z2.real + z2.imaginary * z2.imaginary);
+    result.imaginary = (z1.imaginary * z2.real - z1.real * z2.imaginary) / (z2.real * z2.real + z2.imaginary * z2.imaginary);
     return result;
 }
 
@@ -22,7 +21,6 @@ void calculateComplexResistance(double L, double C, double R1, double R2, double
     double f0 = 1.0 / (2.0 * M_PI * sqrt(L * C));
     printf(DARK_BLUE"\nResonance frequency: %.7e\n"RESET, f0);
     double f = fMin;
-    int i = 0;
     do {
         double omega = 2.0 * M_PI * f;
         switch (circuitChoice) {
@@ -61,8 +59,16 @@ void calculateComplexResistance(double L, double C, double R1, double R2, double
         printf(BLUE"f = %.5e, Z = %.7e %c i * %.7e \n"RESET, f, Z.real, Z.imaginary > 0
                                                                                             ? '+'
                                                                                             : '-', fabs(Z.imaginary));
+        if (f == fMax) {
+            break;
+        }
+        else if (f + fStep > fMax) {
+            f = fMax;
+        }
+        else {
+            f += fStep;
+        }
         f += fStep;
-        i++;
     } while (f <= fMax);
 }
 

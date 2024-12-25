@@ -6,12 +6,12 @@
 #include <conio.h>
 #include "colors.h"
 
-#define FMIN_MIN 1e-15
-#define FMIN_MAX 1e4
-#define FMAX_MIN 1e-15
-#define FMAX_MAX 1e4
-#define VALUE_MIN 1e-15
-#define VALUE_MAX 1e4
+#define FMIN_MIN 1e-3
+#define FMIN_MAX 1e3
+#define FMAX_MIN 1e-3
+#define FMAX_MAX 1e3
+#define VALUE_MIN 1e-3
+#define VALUE_MAX 1e3
 
 bool conditionChoiceCircuit(char value) {
     return value != '1' && value != '2' && value != '3' && value != '4';
