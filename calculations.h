@@ -56,7 +56,7 @@ void calculateComplexResistance(double L, double C, double R1, double R2, double
                 printf(RED"Error. Invalid circuit choice.\n"RESET);
                 break;
         }
-        printf(BLUE"f = %.15lf, Z = %.15lf %c i * %.15lf \n"RESET, f, Z.real, Z.imaginary > 0
+        printf(BLUE"f = %.3lf, Z = %.15lf %c i * %.15lf \n"RESET, f, Z.real, Z.imaginary > 0
                                                                                             ? '+'
                                                                                             : '-', fabs(Z.imaginary));
         if (f == fMax) {
